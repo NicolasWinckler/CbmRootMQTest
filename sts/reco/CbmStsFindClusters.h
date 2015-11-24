@@ -82,7 +82,7 @@ class CbmStsFindClusters : public FairTask
     virtual InitStatus Init();
     void ExecMQ();
     bool InitMQ(const std::string& geo_file);
-    InitStatus SetTimeSlices(CbmTimeSlice* ts);
+    InitStatus SetTimeSlice(CbmTimeSlice* ts);
     TClonesArray* GetClusters() {return fClusters;}
 
     /** Set the DAQ flag to use time slices as an input **/

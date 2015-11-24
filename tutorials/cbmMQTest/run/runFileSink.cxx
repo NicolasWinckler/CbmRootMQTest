@@ -26,7 +26,7 @@ inline int InitConfig(FairMQProgOptions& config,int argc, char** argv)
         ("output.file.tree",    po::value<std::string>()->default_value("Cbmout"),        "Name of the output tree")
         ("output.file.branch",  po::value<std::string>()->default_value("CbmStsCluster"), "Name of the output Branch")
         ("output.file.option",  po::value<std::string>()->default_value("RECREATE"),      "Root file option : UPDATE, RECREATE etc.")
-        ("cluster-classname",   po::value<std::string>()->default_value("CbmStsCluster"), "Hit class name for initializing TClonesArray")
+        ("cluster-classname",   po::value<std::string>()->default_value("CbmStsCluster"), "Cluster class name for initializing TClonesArray")
     ;
 
     config.AddToCmdLineOptions(sink_options);
@@ -70,3 +70,4 @@ int main(int argc, char** argv)
 
     return 0;
 }
+

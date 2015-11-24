@@ -59,7 +59,7 @@ class CbmClusterFinderTask : public BaseProcessorTaskPolicy<CbmClusterFinderTask
 
     void ExecuteTask(CbmTimeSlice& ts)
     {
-        fClusterFinder->SetTimeSlices(&ts);
+        fClusterFinder->SetTimeSlice(&ts);
         fClusterFinder->ExecMQ();
         fContainer = fClusterFinder->GetClusters();
         MQLOG(TRACE)<<"ExecuteTask : TClonesarray size = " <<fContainer->GetEntries();

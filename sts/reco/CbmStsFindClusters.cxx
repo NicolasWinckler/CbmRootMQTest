@@ -281,7 +281,7 @@ bool CbmStsFindClusters::InitMQ(const std::string& geo_file)
 }
 
 // -----   MQ set input   ------------------------------------------------
-InitStatus CbmStsFindClusters::SetTimeSlices(CbmTimeSlice* ts)
+InitStatus CbmStsFindClusters::SetTimeSlice(CbmTimeSlice* ts)
 {
     if(ts)
         fTimeSlice = ts;
