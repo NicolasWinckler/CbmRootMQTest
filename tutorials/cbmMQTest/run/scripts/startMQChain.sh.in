@@ -1,17 +1,15 @@
 #!/bin/bash
 
-
-
 ##########################
 # CONFIGFILE = ini/txt config file, which, in this example, 
 # contain path to json file for the MQDevice configuration (address, MQ methods, etc.), 
 # and other key-values specific to each device (input/output file names, branch, etc.)
 CONFIGFILE="@CMAKE_BINARY_DIR@/bin/config/CbmMQTestConfig.INI"
+GEOFILE="@CMAKE_SOURCE_DIR@/geometry/sts/sts_v15a.geo.root"
 
 ########################## start SAMPLER
 SAMPLER="runStsSampler"
-SAMPLER+=" --id sampler1  -c $CONFIGFILE"
-
+SAMPLER+=" --id sampler1  --config $CONFIGFILE"
 xterm +aw -geometry 100x27+0+0 -hold -e @CMAKE_BINARY_DIR@/bin/$SAMPLER &
 
 ########################## start SPLITTER
@@ -21,15 +19,15 @@ xterm +aw -geometry 100x27+800+500 -hold -e @CMAKE_BINARY_DIR@/bin/$SPLITTER &
 
 ########################## start PROCESSORs
 PROCESSOR1="runStsClusterFinder"
-PROCESSOR1+=" --id processor1 --config $CONFIGFILE --sts-geo-filename @CMAKE_SOURCE_DIR@/geometry/sts/sts_v15a.geo.root"
+PROCESSOR1+=" --id processor1 --config $CONFIGFILE --sts-geo-filename $GEOFILE"
 xterm +aw -geometry 100x27+0+400 -hold -e @CMAKE_BINARY_DIR@/bin/$PROCESSOR1 &
 
 PROCESSOR2="runStsClusterFinder"
-PROCESSOR2+=" --id processor2 --config $CONFIGFILE --sts-geo-filename @CMAKE_SOURCE_DIR@/geometry/sts/sts_v15a.geo.root"
+PROCESSOR2+=" --id processor2 --config $CONFIGFILE --sts-geo-filename $GEOFILE"
 xterm +aw -geometry 100x27+800+0 -hold -e @CMAKE_BINARY_DIR@/bin/$PROCESSOR2 &
 
 PROCESSOR3="runStsClusterFinder"
-PROCESSOR3+=" --id processor3 --config $CONFIGFILE --sts-geo-filename @CMAKE_SOURCE_DIR@/geometry/sts/sts_v15a.geo.root"
+PROCESSOR3+=" --id processor3 --config $CONFIGFILE --sts-geo-filename $GEOFILE"
 xterm +aw -geometry 100x27+800+0 -hold -e @CMAKE_BINARY_DIR@/bin/$PROCESSOR3 &
 
 ########################## start MERGER
@@ -40,7 +38,4 @@ xterm +aw -geometry 100x27+800+500 -hold -e @CMAKE_BINARY_DIR@/bin/$MERGER &
 ########################## start FILESINK
 FILESINK="runCbmMQFileSink"
 FILESINK+=" --id sink1 --config $CONFIGFILE"
-
 xterm +aw -geometry 100x27+0+800 -hold -e @CMAKE_BINARY_DIR@/bin/$FILESINK &
-
-
