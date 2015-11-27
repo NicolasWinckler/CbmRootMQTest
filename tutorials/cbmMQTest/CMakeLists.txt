@@ -67,11 +67,15 @@ link_directories(${LINK_DIRECTORIES})
 Set(Exe_Names
     runStsSampler
     runStsClusterFinder
+#    runStsSplitter
+#    runStsMerger
 )
 
 set(Exe_Source
     run/runStsSampler.cxx
     run/runStsClusterFinder.cxx
+#    run/runSplitter.cxx
+#    run/runMerger.cxx
 )
 
 
@@ -119,6 +123,7 @@ if(NOT CMAKE_SYSTEM_NAME MATCHES Darwin)
 endif(NOT CMAKE_SYSTEM_NAME MATCHES Darwin)
 ############################################################
 
+Set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--no-as-needed")
 
 List(LENGTH Exe_Names _length)
 Math(EXPR _length ${_length}-1)
@@ -145,14 +150,14 @@ ForEach(_file RANGE 0 ${_length})
         CbmData 
         boost_serialization
         CbmEcal
-        CbmRich 
-        CbmTrd 
         CbmTof 
+        CbmRich 
         CbmPsd 
+        CbmTrd 
         #CbmGenerators 
         #Field 
         CbmSts
-        ${UBUNTU_GREATERTHAN_v11_LINKER_FLAG}
+        #${UBUNTU_GREATERTHAN_v11_LINKER_FLAG}
         )
 
     GENERATE_EXECUTABLE()
@@ -184,35 +189,35 @@ Set(DEPENDENCIES
     FairTools 
     CbmData 
     boost_serialization
-    ${UBUNTU_GREATERTHAN_v11_LINKER_FLAG}
+    #${UBUNTU_GREATERTHAN_v11_LINKER_FLAG}
     )
 
     GENERATE_EXECUTABLE()
 
 
-Set(Exe_Source
-    run/runSplitter.cxx
-    run/runMerger.cxx
-)
+#Set(Exe_Source
+#    run/runSplitter.cxx
+#    run/runMerger.cxx
+#)
 
-set(Exe_Names
-    runStsSplitter
-    runStsMerger
-)
+#set(Exe_Names
+#    runStsSplitter
+#    runStsMerger
+#)
 
-List(LENGTH Exe_Names _length)
-Math(EXPR _length ${_length}-1)
+#List(LENGTH Exe_Names _length)
+#Math(EXPR _length ${_length}-1)
 
-ForEach(_file RANGE 0 ${_length})
-    List(GET Exe_Names ${_file} _name)
-    List(GET Exe_Source ${_file} _src)
-    Set(EXE_NAME ${_name})
-    Set(SRCS ${_src})
+#ForEach(_file RANGE 0 ${_length})
+#    List(GET Exe_Names ${_file} _name)
+#    List(GET Exe_Source ${_file} _src)
+#    Set(EXE_NAME ${_name})
+#    Set(SRCS ${_src})
 
-Set(DEPENDENCIES 
-    FairMQ
-    ${FAIRMQ_DEPENDENCIES}
-    )
+#Set(DEPENDENCIES 
+#    FairMQ
+#    ${FAIRMQ_DEPENDENCIES}
+#    )
 
-    GENERATE_EXECUTABLE()
-EndForEach(_file RANGE 0 ${_length})
+#    GENERATE_EXECUTABLE()
+#EndForEach(_file RANGE 0 ${_length})
