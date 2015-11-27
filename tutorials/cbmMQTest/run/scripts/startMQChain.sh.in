@@ -20,7 +20,7 @@ xterm +aw -geometry 100x27+800+500 -hold -e @CMAKE_BINARY_DIR@/bin/$SPLITTER &
 ########################## start PROCESSORs
 PROCESSOR1="runStsClusterFinder"
 PROCESSOR1+=" --id processor1 --config $CONFIGFILE --sts-geo-filename $GEOFILE"
-xterm +aw -geometry 100x27+0+400 -hold -e @CMAKE_BINARY_DIR@/bin/$PROCESSOR1 &
+xterm +aw -geometry 100x27+800+0 -hold -e @CMAKE_BINARY_DIR@/bin/$PROCESSOR1 &
 
 PROCESSOR2="runStsClusterFinder"
 PROCESSOR2+=" --id processor2 --config $CONFIGFILE --sts-geo-filename $GEOFILE"
