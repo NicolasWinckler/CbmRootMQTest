@@ -12,35 +12,35 @@ CONFIGFILE="@CMAKE_BINARY_DIR@/bin/config/CbmMQTestConfig.INI"
 SAMPLER="runStsSampler"
 SAMPLER+=" --id sampler1  -c $CONFIGFILE"
 
-xterm -geometry 200x27+0+0 -hold -e @CMAKE_BINARY_DIR@/bin/$SAMPLER &
+xterm +aw -geometry 100x27+0+0 -hold -e @CMAKE_BINARY_DIR@/bin/$SAMPLER &
 
 ########################## start SPLITTER
-#SPLITTER="genericMQTutoSplitter"
-#SPLITTER+=" --id splitter1 --config $CONFIGFILE"
-#xterm +aw -geometry 100x27+800+500 -hold -e @CMAKE_BINARY_DIR@/bin/$SPLITTER &
+SPLITTER="runStsSplitter"
+SPLITTER+=" --id splitter1 --config $CONFIGFILE"
+xterm +aw -geometry 100x27+800+500 -hold -e @CMAKE_BINARY_DIR@/bin/$SPLITTER &
 
 ########################## start PROCESSORs
 PROCESSOR1="runStsClusterFinder"
 PROCESSOR1+=" --id processor1 --config $CONFIGFILE --sts-geo-filename @CMAKE_SOURCE_DIR@/geometry/sts/sts_v15a.geo.root"
-xterm -geometry 200x27+0+400 -hold -e @CMAKE_BINARY_DIR@/bin/$PROCESSOR1 &
+xterm +aw -geometry 100x27+0+400 -hold -e @CMAKE_BINARY_DIR@/bin/$PROCESSOR1 &
 
-#PROCESSOR2="genericMQTutoProcessor"
-#PROCESSOR2+=" --id processor2 --config $CONFIGFILE"
-#xterm +aw -geometry 100x27+800+0 -hold -e @CMAKE_BINARY_DIR@/bin/$PROCESSOR2 &
+PROCESSOR2="runStsClusterFinder"
+PROCESSOR2+=" --id processor2 --config $CONFIGFILE --sts-geo-filename @CMAKE_SOURCE_DIR@/geometry/sts/sts_v15a.geo.root"
+xterm +aw -geometry 100x27+800+0 -hold -e @CMAKE_BINARY_DIR@/bin/$PROCESSOR2 &
 
-#PROCESSOR3="genericMQTutoProcessor"
-#PROCESSOR3+=" --id processor3 --config $CONFIGFILE"
-#xterm +aw -geometry 100x27+800+0 -hold -e @CMAKE_BINARY_DIR@/bin/$PROCESSOR3 &
+PROCESSOR3="runStsClusterFinder"
+PROCESSOR3+=" --id processor3 --config $CONFIGFILE --sts-geo-filename @CMAKE_SOURCE_DIR@/geometry/sts/sts_v15a.geo.root"
+xterm +aw -geometry 100x27+800+0 -hold -e @CMAKE_BINARY_DIR@/bin/$PROCESSOR3 &
 
 ########################## start MERGER
-#MERGER="genericMQTutoMerger"
-#MERGER+=" --id merger1 --config $CONFIGFILE"
-#xterm +aw -geometry 100x27+800+500 -hold -e @CMAKE_BINARY_DIR@/bin/$MERGER &
+MERGER="runStsMerger"
+MERGER+=" --id merger1 --config $CONFIGFILE"
+xterm +aw -geometry 100x27+800+500 -hold -e @CMAKE_BINARY_DIR@/bin/$MERGER &
 
 ########################## start FILESINK
 FILESINK="runCbmMQFileSink"
 FILESINK+=" --id sink1 --config $CONFIGFILE"
 
-xterm -geometry 200x27+0+800 -hold -e @CMAKE_BINARY_DIR@/bin/$FILESINK &
+xterm +aw -geometry 100x27+0+800 -hold -e @CMAKE_BINARY_DIR@/bin/$FILESINK &
 
 

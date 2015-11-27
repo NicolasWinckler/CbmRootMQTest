@@ -6,12 +6,6 @@ Set(INCLUDE_DIRECTORIES
     ${CBMROOT_SOURCE_DIR}/fairmq/zeromq
     ${CBMROOT_SOURCE_DIR}/base
     ${CBMROOT_SOURCE_DIR}/run
-#    ${CBMROOT_SOURCE_DIR}/tutorials/MQTest
-#    ${CBMROOT_SOURCE_DIR}/tutorials/MQTest/data
-#    ${CBMROOT_SOURCE_DIR}/fles/ipc/src
-#    ${CBMROOT_SOURCE_DIR}/tutorials/MQTest/MQDevices
-#    ${CBMROOT_SOURCE_DIR}/tutorials/MQTest/MQTask
-#    ${CBMROOT_SOURCE_DIR}/tutorials/MQTest/SubTask
     ${CBMROOT_SOURCE_DIR}/tutorials/cbmMQTest
     ${CBMROOT_SOURCE_DIR}/tutorials/cbmMQTest/devices
     ${CBMROOT_SOURCE_DIR}/tutorials/cbmMQTest/devices/policies
@@ -51,13 +45,6 @@ Set(SYSTEM_INCLUDE_DIRECTORIES
 
 Include_Directories(SYSTEM ${SYSTEM_INCLUDE_DIRECTORIES})
 
-#If (Boost_FOUND)
-#  configure_file( ${CBMROOT_SOURCE_DIR}/tutorials/MQTest/macro/startPushPull_cbm.sh.in ${CMAKE_BINARY_DIR}/bin/startPushPull_cbm.sh )
-#  configure_file( ${CBMROOT_SOURCE_DIR}/tutorials/MQTest/macro/startMultiSamplerPushPull_cbm.sh.in ${CMAKE_BINARY_DIR}/bin/startMultiSamplerPushPull_cbm.sh )  
-#  configure_file( ${CBMROOT_SOURCE_DIR}/tutorials/MQTest/macro/startCbmSampler.sh.in ${CMAKE_BINARY_DIR}/bin/startCbmSampler.sh )
-#  configure_file( ${CBMROOT_SOURCE_DIR}/tutorials/MQTest/macro/startCbmMerger.sh.in ${CMAKE_BINARY_DIR}/bin/startCbmMerger.sh )
-#  configure_file( ${CBMROOT_SOURCE_DIR}/tutorials/MQTest/macro/startCbmSink.sh.in ${CMAKE_BINARY_DIR}/bin/startCbmSink.sh )
-#EndIf (Boost_FOUND)
 configure_file( ${CBMROOT_SOURCE_DIR}/tutorials/cbmMQTest/options/CbmMQTestConfig.INI.in ${CMAKE_BINARY_DIR}/bin/config/CbmMQTestConfig.INI)
 configure_file( ${CBMROOT_SOURCE_DIR}/tutorials/cbmMQTest/run/scripts/startMQChain.sh.in ${CMAKE_BINARY_DIR}/bin/startMQChain.sh)
 
@@ -80,13 +67,11 @@ link_directories(${LINK_DIRECTORIES})
 Set(Exe_Names
     runStsSampler
     runStsClusterFinder
-    #runCbmMQFileSink
 )
 
 set(Exe_Source
     run/runStsSampler.cxx
     run/runStsClusterFinder.cxx
-    #run/runFileSink.cxx
 )
 
 
@@ -204,3 +189,30 @@ Set(DEPENDENCIES
 
     GENERATE_EXECUTABLE()
 
+
+Set(Exe_Source
+    run/runSplitter.cxx
+    run/runMerger.cxx
+)
+
+set(Exe_Names
+    runStsSplitter
+    runStsMerger
+)
+
+List(LENGTH Exe_Names _length)
+Math(EXPR _length ${_length}-1)
+
+ForEach(_file RANGE 0 ${_length})
+    List(GET Exe_Names ${_file} _name)
+    List(GET Exe_Source ${_file} _src)
+    Set(EXE_NAME ${_name})
+    Set(SRCS ${_src})
+
+Set(DEPENDENCIES 
+    FairMQ
+    ${FAIRMQ_DEPENDENCIES}
+    )
+
+    GENERATE_EXECUTABLE()
+EndForEach(_file RANGE 0 ${_length})
